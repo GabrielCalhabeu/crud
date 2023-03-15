@@ -18,6 +18,13 @@ module.exports = {
           created_at: new Date(),
           updated_at: new Date(),
         });
+
+        let cidadeList = estadoFound.cidades;
+        await cidadeList.push(id);
+        await Estados.findOneAndUpdate(
+          { id: estadoId },
+          { cidades: cidadeList }
+        );
         return response.json(cidadeCreated);
       } else {
         return response.status(401).json({ error: "Id duplicado" });
@@ -29,6 +36,12 @@ module.exports = {
   async update(request, response) {
     const { id } = request.params;
     const { nome, estadoId } = request.body;
+
+    const estadoExists = await Estado.exists({ id: estadoId });
+
+    if (!estadoExists) {
+      return response.status(404).json({ error: "Estado não encontrado" });
+    }
     const cidadeFound = await Cidades.findOneAndUpdate(
       { id: id },
       {
@@ -41,7 +54,7 @@ module.exports = {
     if (cidadeFound) {
       return response.json(cidadeFound);
     }
-    return response.status(404).json({ error: "Id de estado nao existe" });
+    return response.status(404).json({ error: "Id de cidade nao existe" });
   },
 
   async readAll(request, response) {
@@ -61,7 +74,19 @@ module.exports = {
   async delete(request, response) {
     const { id } = request.params;
     const cidadeDeleted = await Cidades.findOneAndDelete({ id: id });
+
     if (cidadeDeleted) {
+      const estado = await Estados.findOne({ id: cidadeDeleted.estadoId });
+      let index = estado.cidades.indexOf(cidadeDeleted.id);
+      let list = estado.cidades;
+      list.splice(index, 1);
+      if (estado.cidades.length < 1) {
+        list = [];
+      }
+      await Estados.findOneAndUpdate(
+        { id: cidadeDeleted.estadoId },
+        { cidades: list }
+      );
       return response.json(cidadeDeleted);
     }
     return response.status(404).json({ error: "Cidade nao encontrada" });

@@ -34,4 +34,61 @@ module.exports = {
     }
     return response.status(401).json({ error: "Tipo ou Cidade inexistente" });
   },
+
+  async update(request, response) {
+    const { id } = request.params;
+    const { nome, rua, numero, complemento, documento, cidadeId, tipoId } =
+      request.body;
+
+    const cidadeExists = await Cidade.findOne({ id: cidadeId });
+    if (!cidadeExists) {
+      return response.status(404).json({ error: "Cidade não encontrada" });
+    }
+
+    const tipoExists = await Tipo.findOne({ id: tipoId });
+    if (!cidadeExists) {
+      return response.status(404).json({ error: "Tipo não encontrada" });
+    }
+    const pessoaFound = await Pessoa.findOneAndUpdate(
+      { id: id },
+      {
+        nome: nome,
+        rua: rua,
+        numero: numero,
+        complemento: complemento,
+        documento: documento,
+        cidadeId: cidadeId,
+        tipoId: tipoId,
+        updated_at: new Date(),
+      },
+      { new: true }
+    );
+    if (pessoaFound) {
+      return response.json(pessoaFound);
+    }
+    return response.status(404).json({ error: "Pessoa não encontrada" });
+  },
+
+  async readAll(request, response) {
+    const pessoaList = await Pessoa.find();
+    return response.json(pessoaList);
+  },
+
+  async readById(request, response) {
+    const { id } = request.params;
+    const pessoaFound = await Pessoa.findOne({ id: id });
+    if (pessoaFound) {
+      return response.json(pessoaFound);
+    }
+    return response.status(404).json({ error: "Pessoa não encontrada" });
+  },
+
+  async delete(request, response) {
+    const { id } = request.params;
+    const pessoaDeleted = await Pessoa.findOneAndDelete({ id: id });
+    if (pessoaDeleted) {
+      return response.json(pessoaDeleted);
+    }
+    return response.status(404).json({ error: "Pessoa não encontrada" });
+  },
 };
