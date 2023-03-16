@@ -46,7 +46,7 @@ module.exports = {
     }
 
     const tipoExists = await Tipo.findOne({ id: tipoId });
-    if (!cidadeExists) {
+    if (!tipoExists) {
       return response.status(404).json({ error: "Tipo não encontrada" });
     }
     const pessoaFound = await Pessoa.findOneAndUpdate(

@@ -45,23 +45,26 @@ module.exports = {
     const { id } = request.params;
     const { nome, numero, complemento, cidadeId } = request.body;
 
-    const unidadeFound = await Unidade.findOneAndUpdate(
-      { id: id },
-      {
-        nome: nome,
-        numero: numero,
-        complemento: complemento,
-        cidadeId: cidadeId,
-        updated_at: new Date(),
-      },
-      { new: true }
-    );
+    const cidade = await Cidade.findOne({ id: cidadeId });
+    if (cidade) {
+      const unidadeFound = await Unidade.findOneAndUpdate(
+        { id },
+        {
+          nome,
+          numero,
+          complemento,
+          cidadeId,
+          updated_at: new Date(),
+        },
+        { new: true }
+      );
 
-    if (unidadeFound) {
-      return response.json(unidadeFound);
+      if (unidadeFound) {
+        return response.json(unidadeFound);
+      }
+      return response.status(404).json({ error: "Unidade não encontrada" });
     }
-
-    return response.status(404).json({ error: "Unidade não encontrada" });
+    return response.status(400).json({ error: "Cidade inexistente" });
   },
 
   async delete(request, response) {

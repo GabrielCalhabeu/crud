@@ -7,6 +7,8 @@ const pessoaController = require("./controllers/pessoaController");
 const locaisColetaController = require("./controllers/locaisColetaController");
 const doacoesController = require("./controllers/doacoesController");
 const unidadesController = require("./controllers/unidadesController");
+const produtosController = require("./controllers/produtosController");
+const distribuicaoController = require("./controllers/distribuidcaoController");
 //Rota Estados
 routes.post("/estados", estadoController.create);
 routes.post("/estados/:id", estadoController.update);
@@ -55,4 +57,18 @@ routes.get("/unidades", unidadesController.readAll);
 routes.get("/unidades/:id", unidadesController.readById);
 routes.post("/unidades/:id", unidadesController.update);
 routes.delete("/unidades/:id", unidadesController.delete);
+
+// Rotas Produtos
+routes.post("/produtos", produtosController.create);
+routes.get("/produtos", produtosController.readAll);
+routes.get("/produtos/:id", produtosController.readById);
+routes.post("/produtos/:id", produtosController.update);
+routes.delete("/produtos/:id", produtosController.delete);
+
+//Rotas Distribuicoes
+routes.post("/distribuicoes", distribuicaoController.create);
+routes.get("/distribuicoes", distribuicaoController.readAll);
+routes.get("/distribuicoes/:id", distribuicaoController.readById);
+routes.post("/distribuicoes/:id", distribuicaoController.update);
+routes.delete("/distribuicoes/:id", distribuicaoController.delete);
 module.exports = routes;

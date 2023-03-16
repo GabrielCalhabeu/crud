@@ -48,6 +48,15 @@ module.exports = {
     const { id } = request.params;
     const { pessoaId, localId, data } = request.body;
 
+    if (
+      !(await Pessoa.findOne({ id: pessoaId })) ||
+      !(await Local.findOne({ id: localId }))
+    ) {
+      return response
+        .status(400)
+        .json({ error: "Pessoa ou local inexistente" });
+    }
+
     const doacaoFound = await Doacoes.findOneAndUpdate(
       { id: id },
       {
