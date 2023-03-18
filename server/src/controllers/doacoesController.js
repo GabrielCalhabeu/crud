@@ -6,7 +6,7 @@ module.exports = {
   async create(request, response) {
     const { id, pessoaId, localId, data } = request.body;
 
-    if (id === "" || id == null) {
+    if (id === "" || id === null) {
       return response.status(400).json({ error: "Id vazio" });
     }
 

@@ -1,0 +1,28 @@
+.Estados {
+  text-align: center;
+}
+.Estados button {
+  margin-top: 10px;
+  font-size: 20px;
+}
+.Estados input {
+  font-size: large;
+}
+.Estados ul li {
+  list-style-type: none;
+  background-color: rgb(233, 233, 232);
+  width: auto;
+  padding-right: 20px;
+  padding-left: 20px;
+  margin-right: 20px;
+}
+
+.remove {
+  background-color: rgb(222, 49, 83);
+}
+
+.Estados .centralized {
+  display: grid;
+  align-items: center;
+  justify-content: center;
+}

@@ -1,0 +1,17 @@
+.Home {
+  text-align: center;
+}
+
+.titulo {
+  margin-top: 8em;
+}
+.Home li {
+  margin-top: 5px;
+}
+.Home button {
+  font-size: 25px;
+  font-weight: 400;
+  color: rgb(65, 65, 209);
+  border: none;
+  background-color: white;
+}

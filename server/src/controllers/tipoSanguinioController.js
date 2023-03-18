@@ -1,9 +1,9 @@
 const TipoSanguinio = require("../models/tipoSanguinio");
-
+const Pessoas = require("../models/pessoas");
 module.exports = {
   async create(request, response) {
     const { id, tipo, fator } = request.body;
-    if (id === "" || id == null) {
+    if (id === "" || id === null) {
       return response.status(401).json({ error: "Id Vazio" });
     }
     const tipoFound = await TipoSanguinio.findOne({ id: id });
@@ -50,8 +50,13 @@ module.exports = {
 
   async delete(request, response) {
     const { id } = request.params;
-
+    if (await Pessoas.findOne({ tipoId: id })) {
+      return response.status(404).json({
+        error: "Tipo nao pode ser deletado pois possui dependencias",
+      });
+    }
     const tipoDelted = await TipoSanguinio.findOneAndDelete({ id: id });
+
     if (tipoDelted) {
       return response.json(tipoDelted);
     }

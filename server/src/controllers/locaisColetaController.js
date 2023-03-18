@@ -1,5 +1,6 @@
 const LocaisColeta = require("../models/locaisColeta");
 const Cidade = require("../models/cidades");
+const Doacoes = require("../models/doacoes");
 
 module.exports = {
   async create(request, response) {
@@ -74,7 +75,14 @@ module.exports = {
 
   async delete(request, response) {
     const { id } = request.params;
+
+    if (await Doacoes.findOne({ localId: id })) {
+      return response.status(404).json({
+        error: "Local não pode ser deletado pois possui dependencias",
+      });
+    }
     const localDeleted = await LocaisColeta.findOneAndDelete({ id: id });
+
     if (localDeleted) {
       return response.json(localDeleted);
     }

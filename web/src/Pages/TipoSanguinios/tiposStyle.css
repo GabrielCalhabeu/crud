@@ -1,0 +1,37 @@
+.TipoSanguineo {
+  text-align: center;
+}
+.TipoSanguineo button {
+  margin-top: 10px;
+  font-size: 20px;
+}
+.TipoSanguineo input {
+  font-size: large;
+}
+.TipoSanguineo ul li {
+  list-style-type: none;
+  background-color: rgb(233, 233, 232);
+  width: auto;
+  padding-right: 20px;
+  padding-left: 20px;
+  margin-right: 20px;
+}
+
+.remove {
+  background-color: rgb(222, 49, 83);
+}
+
+.TipoSanguineo .centralized {
+  display: grid;
+  align-items: center;
+  justify-content: center;
+}
+.TipoSanguineo td {
+  padding-left: 15px;
+  padding-bottom: 5px;
+  background-color: beige;
+}
+.TipoSanguineo table {
+  margin-top: 10px;
+  margin-left: 55px;
+}

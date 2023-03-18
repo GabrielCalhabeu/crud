@@ -1,0 +1,17 @@
+.App {
+  text-align: center;
+}
+
+.titulo {
+  margin-top: 8em;
+}
+.App li {
+  margin-top: 5px;
+}
+.App button {
+  font-size: 25px;
+  font-weight: 400;
+  color: rgb(65, 65, 209);
+  border: none;
+  background-color: white;
+}

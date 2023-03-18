@@ -1,8 +1,9 @@
 const Estados = require("../models/estados");
+const Cidades = require("../models/cidades");
 module.exports = {
   async create(request, response) {
     const { id, nome, sigla } = request.body;
-    if (id === "" || id == null) {
+    if (id === "" || id === null) {
       return response.status(401).json({ error: "Id Vazio" });
     }
     const estadoFound = await Estados.findOne({ id: id });
@@ -48,7 +49,13 @@ module.exports = {
   },
   async delete(request, response) {
     const { id } = request.params;
+    if (await Cidades.findOne({ estadoId: id })) {
+      return response
+        .status(404)
+        .json({ error: "Estado possui dependencias e nao pode ser deletado" });
+    }
     const estadoDeleted = await Estados.findOneAndDelete({ id: id });
+
     if (estadoDeleted) {
       return response.json(estadoDeleted);
     }

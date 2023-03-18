@@ -1,10 +1,11 @@
 const Cidades = require("../models/cidades");
 const Estados = require("../models/estados");
-
+const Local = require("../models/locaisColeta");
+const Pessoa = require("../models/pessoas");
 module.exports = {
   async create(request, response) {
     const { id, nome, estadoId } = request.body;
-    if (id == null || id === "" || estadoId == null || estadoId === "") {
+    if (id === null || id === "" || estadoId === null || estadoId === "") {
       return response.status(401).json({ error: "Id Vazio" });
     }
     const estadoFound = await Estados.findOne({ id: estadoId });
@@ -37,7 +38,7 @@ module.exports = {
     const { id } = request.params;
     const { nome, estadoId } = request.body;
 
-    const estadoExists = await Estado.exists({ id: estadoId });
+    const estadoExists = await Estados.exists({ id: estadoId });
 
     if (!estadoExists) {
       return response.status(404).json({ error: "Estado não encontrado" });
@@ -73,20 +74,22 @@ module.exports = {
 
   async delete(request, response) {
     const { id } = request.params;
+
+    if (await Local.findOne({ cidadeId: id })) {
+      return response.status(404).json({
+        error: "Cidade nao pode ser excluida pois possui locais",
+      });
+    }
+
+    if (await Local.findOne({ cidadeId: id })) {
+      return response.status(404).json({
+        error: "Cidade nao pode ser excluida pois possui pessoas",
+      });
+    }
+
     const cidadeDeleted = await Cidades.findOneAndDelete({ id: id });
 
     if (cidadeDeleted) {
-      const estado = await Estados.findOne({ id: cidadeDeleted.estadoId });
-      let index = estado.cidades.indexOf(cidadeDeleted.id);
-      let list = estado.cidades;
-      list.splice(index, 1);
-      if (estado.cidades.length < 1) {
-        list = [];
-      }
-      await Estados.findOneAndUpdate(
-        { id: cidadeDeleted.estadoId },
-        { cidades: list }
-      );
       return response.json(cidadeDeleted);
     }
     return response.status(404).json({ error: "Cidade nao encontrada" });

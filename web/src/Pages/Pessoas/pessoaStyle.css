@@ -1,0 +1,31 @@
+.Pessoas {
+  text-align: center;
+}
+.Pessoas button {
+  margin-top: 10px;
+  font-size: 20px;
+}
+.Pessoas input {
+  font-size: large;
+}
+.Pessoas ul li {
+  list-style-type: none;
+  background-color: rgb(233, 233, 232);
+  width: auto;
+  padding-right: 20px;
+  padding-left: 20px;
+  margin-right: 20px;
+}
+
+.remove {
+  background-color: rgb(222, 49, 83);
+}
+
+.Pessoas .centralized {
+  display: grid;
+  align-items: center;
+  justify-content: center;
+}
+.Pessoas td {
+  padding-left: 20px;
+}
