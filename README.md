@@ -10,7 +10,7 @@ Para o cliente, cada página foi separada em um folder, e todos os componentes d
 o App.js apenas aponta para o Home e todas as outras rotas.
 
 Como o banco utilizado é NoSql, a maioria do tratamento de dado é feito no servidor, assim como a requisição de informações de outros documentos.
-Para com as atualizações, elas acontencem de forma que uma entidade, ao ser atualizada, não impacta nos outros documentos, pois o seu ID permanece intacto.
+Para com as atualizações, elas acontecem de forma que uma entidade, ao ser atualizada, não impacta nos outros documentos, pois o seu ID permanece intacto.
 Para com as remoções, o servidor não permite deleção caso a entidade tenha dependência.
 
 Erros feitos pelo usuário, como tentar remover uma entidade inexistete, serão avisados pelo cliente.
