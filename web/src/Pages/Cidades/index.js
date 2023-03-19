@@ -194,7 +194,7 @@ const ListCidades = () => {
 
         <ul>
           {cidades.map((cidade) => (
-            <li>
+            <li key={cidade.id}>
               {cidade.id} - {cidade.nome} - {getEstadosById(cidade.estadoId)} -
               | {cidade.created_at} | {cidade.updated_at}
             </li>
