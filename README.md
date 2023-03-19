@@ -15,6 +15,10 @@ Para com as remoções, o servidor não permite deleção caso a entidade tenha 
 
 Erros feitos pelo usuário, como tentar remover uma entidade inexistete, serão avisados pelo cliente.
 
+TODAS as entidas foram implementadas, entretanto, apenas aquelas requisitadas na atividade que foram implementadas no font-end do CRUD, entretanto, possuem funcionalidade no servidor, assim como as entidades já existem no Banco de Dados, caso sejam necessárias (Elas possuem id: 0).
+
+Atualmente no banco ja existem algumas entidade.
+
 ## Execução
 Para executar, é necessário usar npm start, em CRUD/web. e npm run dev em CRUD/server/src. <br/>
 Atualmente o servidor se conecta em um banco em nuvem, e portanto o projeto não possui o banco. <br/>
