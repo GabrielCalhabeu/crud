@@ -1,7 +1,7 @@
 # CRUD
 
 ## Arquitetura
-No projeto foi utilizado: MongoDB, para o banco de dados. Express-Axios para servidor-cliente. E Nodejs para o fontend.
+No projeto foi utilizado: MongoDB, para o banco de dados. Express-Axios para servidor-cliente. E Nodejs para o back end e React para o fontend.
 Cada modelo em Mongoose (modelo do MongoDB) foi separado e exportado para o seu respectivo controllador, que é exportado para o router.
 
 A parte do servidor foi salvo em CRUD/server.
